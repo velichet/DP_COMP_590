@@ -37,11 +37,25 @@ function parse(data) {
 }
 
 async function sendData(data) {
+    payload = {
+        user_id: "12345",
+        data: data,
+        private: false,
+        description: "Medical data from UNC hospital",
+        author: "Matthew Gilmore",
+        local: false,
+        stats: {
+            "age": ["bounded_mean", "max", "min"],
+            "height": ["bounded_mean", "max", "min", "standard_deviation"],
+            "weight": ["bounded_mean", "max", "min"]
+        }
+    }
+
     $.ajax({
         type: "POST",
         url: "/upload",
         contentType: "application/json",
-        data: JSON.stringify(data),
+        data: JSON.stringify(payload),
         dataType: "json",
         success: function(response) {
             console.log(response);
