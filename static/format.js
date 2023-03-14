@@ -45,9 +45,54 @@ async function sendData(data) {
         author: "Matthew Gilmore",
         local: false,
         stats: {
-            "age": ["bounded_mean", "max", "min"],
-            "height": ["bounded_mean", "max", "min", "standard_deviation"],
-            "weight": ["bounded_mean", "max", "min"]
+            "age": {"bounded_mean": {
+                "epsilon": 5,
+                "low": 10,
+                "high": 100
+            },
+            "max": {
+                "epsilon": 5,
+                "low": 10,
+                "high": 100
+            },
+            "min": {
+                "epsilon": 5,
+                "low": 10,
+                "high": 100
+            }
+        },
+            "height": {"bounded_mean": {
+                "epsilon": 5,
+                "low": 30,
+                "high": 80
+            },
+            "max": {
+                "epsilon": 5,
+                "low": 30,
+                "high": 80
+            },
+            "min": {
+                "epsilon": 5,
+                "low": 30,
+                "high": 80
+            }
+        },
+            "weight": {"bounded_mean": {
+                "epsilon": 5,
+                "low": 50,
+                "high": 200
+            },
+            "max": {
+                "epsilon": 5,
+                "low": 50,
+                "high": 200
+            },
+            "min": {
+                "epsilon": 5,
+                "low": 50,
+                "high": 200
+            }
+        }
         }
     }
 
