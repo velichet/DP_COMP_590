@@ -1,16 +1,18 @@
 from flask import Blueprint, render_template, request, Response
 from scripts.driver.format import csv_format
 from scripts.driver.global_driver import driver_global_algo
+from bson.objectid import ObjectId
+import json
+from bson import json_util
 
 main = Blueprint('main', __name__)
 
+# Base API to return index page
 @main.route('/')
 def index():
-    # db = mongo.db
-    # datasets_collection = db.datasets
-    # datasets_collection.insert_one({"id":1,"test":"success"})
     return render_template('index.html')
 
+# Upload CSV to mongo database
 @main.route('/upload', methods=['POST'])
 def upload():
 
@@ -47,5 +49,28 @@ def upload():
 
     return Response(status=200)
 
+# Retrieve data stats and display
+@main.route('/view/<datastatid>', methods=['GET'])
+def get_datastats(datastatid):
+
+    # Connect to mongo datastats collection
+    db = mongo.get_database('diff-priv-data')
+    datastats_collection = db.data_stats
+
+    # Connect to mongo datasets collection
+    datasets_collection = db.datasets
+
+    # Find datastats
+    stats = datastats_collection.find_one({"_id": ObjectId(datastatid)})
+
+    # Find data metadata
+    dataset_id = stats['datasets_id']
+    metadata = datasets_collection.find_one({"_id": dataset_id})
+
+    stats['author'] = metadata['author']
+    stats['description'] = metadata['description']
+    stats['local'] = metadata['local']
+
+    return json.loads(json_util.dumps(stats))
 
 from app import mongo
