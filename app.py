@@ -1,11 +1,12 @@
 from flask import Flask, render_template
 from routes.routes import main
 import pymongo
+import os
 
 
 app = Flask(__name__)
 
-mongo = pymongo.MongoClient('mongodb+srv://mattsg:c9X692mAK5fzmUee@diff-privacy.o8huhxp.mongodb.net/?retryWrites=true&w=majority')
+mongo = pymongo.MongoClient(os.environ.get('MONGO_URI'))
 
 app.register_blueprint(main)
 
