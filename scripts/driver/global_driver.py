@@ -1,7 +1,34 @@
 from scripts.algorithms.globaldp.global_algos import global_bounded_algo
 
 def driver_global_algo(data: dict, stats: dict):
+    '''
+    Compute the specified global DP statistics on the data
 
+    Input (data: dict, stats: dict):
+        data = {
+            age: [10,20,30]
+            height: [50,60,70]
+            wight: [100,110,120]
+        }
+        stats = {
+            age: {
+                bounded_mean: {
+                    epsilon: 5,
+                    low: 0,
+                    height: 100
+                }
+            },
+            ...
+        }
+
+    Output:
+        stats = {
+            age: {
+                bounded_mean: 20.5,
+                ...
+            }
+        }
+    '''
     result = {}
 
     # Get column names to compute global stats
@@ -24,3 +51,5 @@ def driver_global_algo(data: dict, stats: dict):
         result[col] = temp
    
     return result
+
+# TODO: COUNT and (DYNAMIC) PERCENTILE SUPPORT
