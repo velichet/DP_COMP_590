@@ -7,10 +7,20 @@ from bson import json_util
 
 main = Blueprint('main', __name__)
 
-# Base API to return index page
+# Base API to return home page
 @main.route('/')
 def index():
     return render_template('index.html')
+
+# Display Gallery page
+@main.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
+# Display MyData page
+@main.route('/mydata')
+def mydata():
+    return render_template('mydata.html')
 
 # Upload CSV to mongo database
 @main.route('/upload', methods=['POST'])
