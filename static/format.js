@@ -1,114 +1,59 @@
-    /*------ Method for read uploded csv file ------*/
-function upload() {
-       
-    let input = document.getElementById('csvFile');
-    input.addEventListener('change', function() {
+var btn = document.getElementById('add-stats')
+btn.addEventListener('click', addStat)
 
-    if (this.files && this.files[0]) {
-
-        var myFile = this.files[0];
-        var reader = new FileReader();
-        
-        reader.addEventListener('load', function (e) {
-            
-            let csvdata = e.target.result; 
-            sendData(csvdata)
-            // parse(csvdata); // calling function for parse csv data 
-        });
-        
-        console.log(reader.readAsBinaryString(myFile));
-        
+function addStat() {
+    var e = document.createElement('div');
+    e.innerHTML = `
+    <div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-6">
+          <label for="columnTitle" class="form-label mt-2">Column title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="columnTitle"
+            placeholder="Column name"
+          />
+      </div>
+      <div class="col-sm-6">
+          <label for="stat-choice" class="form-label mt-2">Statistic</label>
+          <select class="form-select" aria-label="Default select" id="stat-choice">
+              <option selected="">Choose a stat</option>
+              <option value="bounded_mean">Bounded Mean</option>
+              <option value="bounded_sum">Bounded Sum</option>
+              <option value="median">Median</option>
+              <option value="min">Minimum</option>
+              <option value="max">Maximum</option>
+              <option value="standard_deviation">Standard Deviation</option>
+              <option value="variance">Variance</option>
+            </select>
+          <label for="epsilon" class="form-label mt-2">Epsilon</label>
+          <input
+            type="number"
+            class="form-control"
+            id="epsilon"
+            placeholder="0.5"
+          />
+          <label for="low" class="form-label mt-2">Low</label>
+          <input
+            type="number"
+            class="form-control"
+            id="low"
+            placeholder="0"
+          />
+          <label for="high" class="form-label mt-2">High</label>
+          <input
+            type="number"
+            class="form-control"
+            id="high"
+            placeholder="1000"
+          />
+      </div>
+  </div>
+</div>`
+    var btn = document.getElementById('add-btn')
+    while(e.firstChild) {
+        btn.appendChild(e.firstChild)
     }
-    });
+
 }
-
-/*------- Method for parse csv data and display --------------*/
-function parse(data) {
-
-    let parsedata = [];
-
-    let newLinebrk = data.split("\n");
-    for(let i = 0; i < newLinebrk.length; i++) {
-
-        parsedata.push(newLinebrk[i].split(","))
-    }
-
-    console.table(parsedata)
-}
-
-async function sendData(data) {
-    payload = {
-        user_id: "12345",
-        data: data,
-        private: false,
-        description: "Medical data from UNC hospital",
-        author: "Matthew Gilmore",
-        local: false,
-        stats: {
-            "age": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            }
-        },
-            "height": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            }
-        },
-            "weight": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            }
-        }
-        }
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "/upload",
-        contentType: "application/json",
-        data: JSON.stringify(payload),
-        dataType: "json",
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-} 
-
-upload()

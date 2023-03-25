@@ -14,8 +14,8 @@
       crossorigin="anonymous"
     />
 
-    <link href="../static/home.css" rel="stylesheet" />
     <link href="../static/nav.css" rel="stylesheet" />
+    <link href="../static/upload.css" rel="stylesheet" />
 
     <base href="http://127.0.0.1:8000/" />
 
@@ -71,64 +71,104 @@
         </nav>
       </div>
 
-      <!-- Header -->
-
-      <div
-        class="position-relative overflow-hidden p-3 p-md-5 mt-3 mb-3 text-center header-grad rounded"
-      >
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 font-weight-normal">Safely Stat</h1>
-          <p class="lead font-weight-normal">A Differential Privacy Platform</p>
-          <a class="btn btn-outline-secondary upload-btn" href="mydata"
-            >Upload Your Data</a
-          >
-        </div>
-        <div class="product-device shadow-sm d-none d-md-block"></div>
-        <div
-          class="product-device product-device-2 shadow-sm d-none d-md-block"
-        ></div>
-      </div>
-
       <div class="row">
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">About</h5>
-              <p class="card-text">
-                Created by two students at the University of North Carolina at
-                Chapel Hill text ever since the 1500s, when an unknown printer
-                took a galley of type and scrambled it to make a type specimen
-                book. It has survived not only five centuries, but also the leap
-                into electronic typesetting, remaining essentially unchanged. It
-                was popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div class="upload-form col-sm-12">
+          <h3>Upload Dataset</h3>
+          <form>
+            <label for="datasetTitle" class="form-label mt-2">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="datasetTitle"
+              placeholder="My dataset"
+            />
 
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Learn More</h5>
-              <p class="card-text">Explore the site to learn more</p>
+            <label for="datasetDesc" class="form-label mt-2">Description</label>
+            <textarea
+              class="form-control desc-box"
+              id="datasetDesc"
+              rows="4"
+              placeholder="My dataset"
+            ></textarea>
+
+            <div class="form-check form-switch mt-2">
+              <label class="form-check-label" for="dpType"
+                >Global or Local</label
+              >
+              <input class="form-check-input" type="checkbox" id="dpType" />
             </div>
-          </div>
+            <!-- Stats -->
+            <div id="stats">
+                <h5>Stats</h5>
+                <div id="add-btn">
+                    <button type="button" class="btn btn-outline-dark" id="add-stats">Add stats</button>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="columnTitle" class="form-label mt-2">Column title</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="columnTitle"
+                              placeholder="Column name"
+                            />
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="stat-choice" class="form-label mt-2">Statistic</label>
+                            <select class="form-select" aria-label="Default select" id="stat-choice">
+                                <option selected="">Choose a stat</option>
+                                <option value="bounded_mean">Bounded Mean</option>
+                                <option value="bounded_sum">Bounded Sum</option>
+                                <option value="median">Median</option>
+                                <option value="min">Minimum</option>
+                                <option value="max">Maximum</option>
+                                <option value="standard_deviation">Standard Deviation</option>
+                                <option value="variance">Variance</option>
+                              </select>
+                            <label for="epsilon" class="form-label mt-2">Epsilon</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="epsilon"
+                              placeholder="0.5"
+                            />
+                            <label for="low" class="form-label mt-2">Low</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="low"
+                              placeholder="0"
+                            />
+                            <label for="high" class="form-label mt-2">High</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="high"
+                              placeholder="1000"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Stats -->
+            <label for="formFile" class="form-label">CSV File</label>
+            <input class="form-control" type="file" id="formFile">
+          </form>
         </div>
       </div>
     </div>
-
     <footer class="black-bg footer-row footer">
       <p class="font-weight-normal white footer-item">Safely Stat</p>
     </footer>
-    <!-- <script src="../static/format.js"></script> -->
+
+    <!-- Scripts -->
+    <script src="../static/format.js"></script>
 
     <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-    crossorigin="anonymous"
-  ></script>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

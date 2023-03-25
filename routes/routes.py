@@ -22,6 +22,11 @@ def gallery():
 def mydata():
     return render_template('mydata.html')
 
+# Display Upload page
+@main.route('/upload')
+def upload_page():
+    return render_template('upload.html')
+
 # Upload CSV to mongo database
 @main.route('/upload', methods=['POST'])
 def upload():

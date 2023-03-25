@@ -4,3 +4,52 @@
     <form>
         <input type="file" id="csvFile">
       </form>
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-6">
+          <label for="columnTitle" class="form-label mt-2">Column title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="columnTitle"
+            placeholder="Column name"
+          />
+      </div>
+      <div class="col-sm-6">
+          <label for="stat-choice" class="form-label mt-2">Statistic</label>
+          <select class="form-select" aria-label="Default select" id="stat-choice">
+              <option selected="">Choose a stat</option>
+              <option value="bounded_mean">Bounded Mean</option>
+              <option value="bounded_sum">Bounded Sum</option>
+              <option value="median">Median</option>
+              <option value="min">Minimum</option>
+              <option value="max">Maximum</option>
+              <option value="standard_deviation">Standard Deviation</option>
+              <option value="variance">Variance</option>
+            </select>
+          <label for="epsilon" class="form-label mt-2">Epsilon</label>
+          <input
+            type="number"
+            class="form-control"
+            id="epsilon"
+            placeholder="0.5"
+          />
+          <label for="min" class="form-label mt-2">Minimum</label>
+          <input
+            type="number"
+            class="form-control"
+            id="min"
+            placeholder="0"
+          />
+          <label for="max" class="form-label mt-2">Maximum</label>
+          <input
+            type="number"
+            class="form-control"
+            id="max"
+            placeholder="1000"
+          />
+      </div>
+  </div>
+</div>

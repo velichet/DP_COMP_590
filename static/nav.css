@@ -7,8 +7,12 @@ body {
   margin-bottom: 100px;
 }
 
+html, body {
+  width:100%;
+  overflow-x: hidden;
+}
+
 .navbar-dark .navbar-toggler {
-    color: white;
     border-color: rgba(255,255,255,0);
     padding:0;
   }
@@ -18,7 +22,7 @@ body {
   }
   
   .navbar-dark .navbar-nav .nav-link {
-    color: white;
+    /* color: white; */
     mix-blend-mode:hard-light;
   }
   
@@ -26,9 +30,6 @@ body {
     width: 100%;
   }
   
-  a:hover {
-    color: white;
-  }
   
   @media (min-width: 768px) {
     .navbar-expand-md .navbar-nav {
@@ -53,5 +54,5 @@ body {
 }
 
 .white {
-  color: white;
+  color: lightgray;
 }
