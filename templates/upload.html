@@ -74,13 +74,14 @@
       <div class="row">
         <div class="upload-form col-sm-12">
           <h3>Upload Dataset</h3>
-          <form>
+          <form id="dataInput">
             <label for="datasetTitle" class="form-label mt-2">Title</label>
             <input
               type="text"
               class="form-control"
               id="datasetTitle"
               placeholder="My dataset"
+              name="title"
             />
 
             <label for="datasetDesc" class="form-label mt-2">Description</label>
@@ -89,22 +90,28 @@
               id="datasetDesc"
               rows="4"
               placeholder="My dataset"
+              name="description"
             ></textarea>
 
             <div class="form-check form-switch mt-2">
               <label class="form-check-label" for="dpType"
                 >Global or Local</label
               >
-              <input class="form-check-input" type="checkbox" id="dpType" />
+              <input class="form-check-input" type="checkbox" id="dpType" name="dp_type"/>
             </div>
             <!-- Stats -->
-            <div id="stats">
-                <h5>Stats</h5>
-                <div id="add-btn">
-                    <button type="button" class="btn btn-outline-dark" id="add-stats">Add stats</button>
+            <div id="stats" class="mt-4">
+                <h5>Field Statistics</h5>
+                <p class="mt-2 mb-2">In the following section, specify the fields (columns) in your dataset and the corresponding statistics
+                  that you wish to include in the gallery piece. To add a field, press the "Add Column" button. To add a
+                  statistic for a column, press the "Add Stat" button. Please note, when you upload your CSV dataset, your data
+                  will be automatically uploaded and you will be redirected to your MyData page.
+                </p>
+                <div class="mt-2 mb-2">
+                    <button type="button" class="btn btn-outline-dark" id="add-col">Add Column</button>
                 </div>
-                <div class="container-fluid">
-                    <div class="row">
+                <div class="container-fluid" id="add-col-btn">
+                    <div class="row" id="col-stat-box">
                         <div class="col-sm-6">
                             <label for="columnTitle" class="form-label mt-2">Column title</label>
                             <input
@@ -112,11 +119,16 @@
                               class="form-control"
                               id="columnTitle"
                               placeholder="Column name"
+                              name="col_name"
                             />
+
+                            <div id="add-stat-btn" class="mt-2">
+                              <button type="button" class="btn btn-outline-dark" id="add-stat">Add Stat</button>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="stat-box">
                             <label for="stat-choice" class="form-label mt-2">Statistic</label>
-                            <select class="form-select" aria-label="Default select" id="stat-choice">
+                            <select class="form-select" aria-label="Default select" id="stat-choice" name="stat_choice">
                                 <option selected="">Choose a stat</option>
                                 <option value="bounded_mean">Bounded Mean</option>
                                 <option value="bounded_sum">Bounded Sum</option>
@@ -132,6 +144,7 @@
                               class="form-control"
                               id="epsilon"
                               placeholder="0.5"
+                              name="epsilon"
                             />
                             <label for="low" class="form-label mt-2">Low</label>
                             <input
@@ -139,6 +152,7 @@
                               class="form-control"
                               id="low"
                               placeholder="0"
+                              name="low"
                             />
                             <label for="high" class="form-label mt-2">High</label>
                             <input
@@ -146,12 +160,14 @@
                               class="form-control"
                               id="high"
                               placeholder="1000"
+                              name="high"
                             />
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Stats -->
+            <h5 class="mt-4">Upload CSV Dataset</h5>
             <label for="formFile" class="form-label">CSV File</label>
             <input class="form-control" type="file" id="formFile">
           </form>
