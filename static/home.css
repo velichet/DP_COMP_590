@@ -19,6 +19,7 @@
 
 .header-grad {
   background-image: linear-gradient(45deg, rgb(12,22,151), rgb(248,248,255));
+  box-shadow: 0 0 5px rgb(200, 200, 200);
 }
 
 .upload-btn {
@@ -33,5 +34,6 @@
 .card {
   border:none;
   background-color: rgb(250,250,250);
-  box-shadow: 5px 5px 5px rgb(245,245,245);
+  /* box-shadow: 5px 5px 5px rgb(245,245,245); */
+  box-shadow: 0 0 5px rgb(230, 230, 230);
 }

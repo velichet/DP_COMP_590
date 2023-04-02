@@ -25,12 +25,12 @@ function addCol() {
   e.innerHTML = `
   <div class="row" id="col-stat-box">
   <div class="col-sm-6">
-      <label for="columnTitle" class="form-label mt-2">Column title</label>
+      <label for="columnTitle" class="form-label mt-2">Field Name</label>
       <input
         type="text"
         class="form-control"
         id="columnTitle"
-        placeholder="Column name"
+        placeholder="Field one"
         name="col_name"
       />
 

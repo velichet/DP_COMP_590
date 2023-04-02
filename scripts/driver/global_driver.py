@@ -45,7 +45,7 @@ def driver_global_algo(data: dict, stats: dict):
         # Compute all stats for column
         for stat in stats_list:
             params = stats[col][stat]
-            val = global_bounded_algo(data[col],params['epsilon'], stat, params['low'], params['high'])
+            val = global_bounded_algo(data[col], float(params['epsilon']), stat, float(params['low']), float(params['high']))
             temp[stat] = val
 
         result[col] = temp

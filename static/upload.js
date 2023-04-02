@@ -1,9 +1,61 @@
-    /*------ Method for read uploded csv file ------*/
+// ITERATING OVER THE FORM
+
+function form() {
+    // Get form
+    var form = document.forms.dataInput
+
+    var local = window.location.pathname.includes("local")
+    // Create object to hold form data
+    var obj = {
+        "title": form.datasetTitle.value,
+        "description": form.datasetDesc.value,
+        "local": local
+    }
+
+    // Current field key
+    var currFKey;
+    // Statistics object
+    var stats = {};
+    // Get remaining form data
+    for(var i=0; i< form.elements.length; i++ ) {
+        var fieldName = form.elements[i].name;
+        var fieldValue = form.elements[i].value;
+        console.log(fieldName + ": " + fieldValue)
+
+        if (fieldName === "col_name") {
+            currFKey = fieldValue;
+            stats[currFKey] = {}
+        }
+
+        var stat = {}
+        if (fieldName === "stat_choice") {
+            stat[fieldValue] = {
+                "epsilon": form.elements[i + 1].value,
+                "low": form.elements[i + 2].value,
+                "high": form.elements[i + 3].value
+            }
+            i+=3;
+            stats[currFKey] = Object.assign(stat, stats[currFKey])
+        }
+
+        
+    }
+
+    obj["stats"] = stats;
+
+    return obj
+}
+
+
+
+
+/*------ Method for read uploded csv file ------*/
 function upload() {
        
     let input = document.getElementById('csvFile');
     input.addEventListener('change', function() {
-
+    
+    var formdata = form();
     if (this.files && this.files[0]) {
 
         var myFile = this.files[0];
@@ -12,7 +64,7 @@ function upload() {
         reader.addEventListener('load', function (e) {
             
             let csvdata = e.target.result; 
-            sendData(csvdata)
+            sendData(csvdata, formdata)
             // parse(csvdata); // calling function for parse csv data 
         });
         
@@ -23,78 +75,26 @@ function upload() {
 }
 
 /*------- Method for parse csv data and display --------------*/
-function parse(data) {
+// function parse(data) {
 
-    let parsedata = [];
+//     let parsedata = [];
 
-    let newLinebrk = data.split("\n");
-    for(let i = 0; i < newLinebrk.length; i++) {
+//     let newLinebrk = data.split("\n");
+//     for(let i = 0; i < newLinebrk.length; i++) {
 
-        parsedata.push(newLinebrk[i].split(","))
-    }
+//         parsedata.push(newLinebrk[i].split(","))
+//     }
 
-    console.table(parsedata)
-}
+//     console.table(parsedata)
+// }
 
-async function sendData(data) {
+async function sendData(csvdata, formdata) {
     payload = {
-        user_id: "12345",
-        data: data,
-        private: false,
-        title: "Test Data",
-        description: "Medical data from UNC hospital",
-        author: "Matthew Gilmore",
-        local: false,
-        stats: {
-            "age": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 10,
-                "high": 100
-            }
-        },
-            "height": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 30,
-                "high": 80
-            }
-        },
-            "weight": {"bounded_mean": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            },
-            "max": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            },
-            "min": {
-                "epsilon": 5,
-                "low": 50,
-                "high": 200
-            }
-        }
-        }
+        data: csvdata,
+        title: formdata.title,
+        description: formdata.description,
+        local: formdata.local,
+        stats: formdata.stats
     }
 
     $.ajax({

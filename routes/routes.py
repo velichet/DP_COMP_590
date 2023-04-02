@@ -23,9 +23,9 @@ def mydata():
     return render_template('mydata.html')
 
 # Display Upload page
-@main.route('/upload')
+@main.route('/upload-global')
 def upload_page():
-    return render_template('upload.html')
+    return render_template('uploadglobal.html')
 
 # Upload CSV to mongo database
 @main.route('/upload', methods=['POST'])
@@ -43,11 +43,11 @@ def upload():
 
     # Insert data into datasets collection
     _id = datasets_collection.insert_one({
-        "user_id": payload['user_id'],
+        "user_id": 0, # TEMP NEED USER AUTH
         "data": data,
-        "private": payload['private'],
+        "title": payload['title'],
         "description": payload['description'],
-        "author": payload['author'],
+        "author": "author", # TEMP NEED USER AUTH
         "local": payload['local']
         })
 
@@ -82,6 +82,7 @@ def get_datastats(datastatid):
     dataset_id = stats['datasets_id']
     metadata = datasets_collection.find_one({"_id": dataset_id})
 
+    stats['title'] = metadata['title']
     stats['author'] = metadata['author']
     stats['description'] = metadata['description']
     stats['local'] = metadata['local']
