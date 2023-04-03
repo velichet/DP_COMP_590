@@ -22,10 +22,15 @@ def gallery():
 def mydata():
     return render_template('mydata.html')
 
-# Display Upload page
+# Display Upload page for global
 @main.route('/upload-global')
-def upload_page():
+def upload_page_global():
     return render_template('uploadglobal.html')
+
+# Display Upload page for local
+@main.route('/upload-local')
+def upload_page_local():
+    return render_template('uploadlocal.html')
 
 # Upload CSV to mongo database
 @main.route('/upload', methods=['POST'])

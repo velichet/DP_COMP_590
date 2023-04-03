@@ -12,3 +12,7 @@
     color:lightgray;
     background-color: black;
 }
+
+p {
+    font-weight: 300;
+}

@@ -37,3 +37,7 @@
   /* box-shadow: 5px 5px 5px rgb(245,245,245); */
   box-shadow: 0 0 5px rgb(230, 230, 230);
 }
+
+p  {
+  font-weight: 300;
+}

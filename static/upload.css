@@ -10,3 +10,7 @@
 .desc-box {
     height: 10vh;
 }
+
+p, label  {
+    font-weight: 300;
+  }
