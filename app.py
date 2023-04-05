@@ -1,5 +1,6 @@
-from flask import Flask, render_template
-from routes.routes import main
+from flask import Flask
+from routes.data import data
+from routes.pages import page
 import pymongo
 import os
 
@@ -8,7 +9,8 @@ app = Flask(__name__)
 
 mongo = pymongo.MongoClient(os.environ.get('MONGO_URI'))
 
-app.register_blueprint(main)
+app.register_blueprint(data)
+app.register_blueprint(page)
 
 if __name__ == "__main__":
     app.run(port=8000,debug=True)

@@ -5,35 +5,10 @@ from bson.objectid import ObjectId
 import json
 from bson import json_util
 
-main = Blueprint('main', __name__)
-
-# Base API to return home page
-@main.route('/')
-def index():
-    return render_template('index.html')
-
-# Display Gallery page
-@main.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
-
-# Display MyData page
-@main.route('/mydata')
-def mydata():
-    return render_template('mydata.html')
-
-# Display Upload page for global
-@main.route('/upload-global')
-def upload_page_global():
-    return render_template('uploadglobal.html')
-
-# Display Upload page for local
-@main.route('/upload-local')
-def upload_page_local():
-    return render_template('uploadlocal.html')
+data = Blueprint('data', __name__)
 
 # Upload CSV to mongo database
-@main.route('/upload', methods=['POST'])
+@data.route('/upload', methods=['POST'])
 def upload():
 
     # Get data from request
@@ -70,7 +45,7 @@ def upload():
     return Response(status=200)
 
 # Retrieve data stats and display
-@main.route('/view/<datastatid>', methods=['GET'])
+@data.route('/view/<datastatid>', methods=['GET'])
 def get_datastats(datastatid):
 
     # Connect to mongo datastats collection
