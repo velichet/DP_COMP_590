@@ -30,22 +30,26 @@
         <div class="col-sm-12 col-md-6 mt-3 mb-3">
           <div class="card">
             <div class="card-body">
-              <h3 class="card-title">Profile</h3>
               <h5 class="card-title">Name</h5>
               <p class="card-text" id="username">John Doe</p>
               <h5 class="card-title">Email</h5>
               <p class="card-text" id="email">email@email.com</p>
             </div>
           </div>
+
           <div class="card mt-4">
             <div class="card-body">
-              <h3 class="card-title">MyData</h3>
               <h5 class="card-title">Upload</h5>
               <p class="card-text">
                 To upload CSV data, choose one of the options from the Upload Data box.
                 We currently have support for seven statistics in the Global Model and one
                 statistic (count) in the Local Model.
               </p>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-body">
               <h5 class="card-title">Datasets</h5>
               <p class="card-text">
                 To view your uploaded datasets, scroll down and view the various
@@ -54,19 +58,11 @@
               </p>
             </div>
           </div>
+
         </div>
 
         <div class="col-sm-12 col-md-6 mt-3 mb-3">
           <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Upload Data</h3>
-              <p class="card-text">
-                To create a gallery piece, upload your CSV data using one of the two options below.
-              </p>
-            </div>
-          </div>
-
-          <div class="card mt-2">
             <div class="card-body">
               <h5>Global Model</h5>
               <p>Your raw data will be sent to our database. Noise will be injected for all user defined queries.</p>
@@ -88,11 +84,15 @@
             </div>
         </div>
       </div>
+
+      <!-- User datasets -->
+      <div class="row">
+        <h3>datasets</h3>
+      </div>
+
     </div>
 
-    <footer class="black-bg footer-row footer">
-      <p class="font-weight-normal white footer-item">Safely Stat</p>
-    </footer>
+    {% include 'footer.html' %}
     <!-- <script src="../static/format.js"></script> -->
 
     <script

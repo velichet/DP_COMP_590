@@ -12,11 +12,6 @@ def index():
 def about():
     return render_template('about.html')
 
-# Display Gallery page
-@page.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
-
 # Display MyData page
 @page.route('/mydata')
 def mydata():

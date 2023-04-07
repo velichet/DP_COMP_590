@@ -2,7 +2,7 @@ import pandas as pd
 from io import StringIO
 
 # Format CSV
-def csv_format(data):
+def csv_format(data: str):
     """
     Input (CSV str):
         '''
@@ -17,6 +17,9 @@ def csv_format(data):
             'weight': [132, ...]
         }
     """
+
+    # Make CSV all lower case
+    data = data.lower()   
 
     # Convert CSV string to String IO
     csv_string = StringIO(data)

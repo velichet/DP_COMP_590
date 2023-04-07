@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, Response
+from flask import Blueprint, request, Response, redirect, url_for, render_template
 from scripts.driver.format import csv_format
 from scripts.driver.global_driver import driver_global_algo
 from bson.objectid import ObjectId
@@ -25,9 +25,6 @@ def upload():
     _id = datasets_collection.insert_one({
         "user_id": 0, # TEMP NEED USER AUTH
         "data": data,
-        "title": payload['title'],
-        "description": payload['description'],
-        "author": "author", # TEMP NEED USER AUTH
         "local": payload['local']
         })
 
@@ -39,10 +36,15 @@ def upload():
         datastats_collection = db.data_stats
         datastats_collection.insert_one({
             "datasets_id": _id.inserted_id,
-            "stats": stats
+            "user_id": 0, # TEMP NEED USER AUTH
+            "stats": stats,
+            "title": payload['title'],
+            "description": payload['description'],
+            "author": "author", # TEMP NEED USER AUTH,
+            "stats_data": payload['stats']
         })
-
-    return Response(status=200)
+    
+    return url_for('page.mydata')
 
 # Retrieve data stats and display
 @data.route('/view/<datastatid>', methods=['GET'])
@@ -52,21 +54,24 @@ def get_datastats(datastatid):
     db = mongo.get_database('diff-priv-data')
     datastats_collection = db.data_stats
 
-    # Connect to mongo datasets collection
-    datasets_collection = db.datasets
-
     # Find datastats
     stats = datastats_collection.find_one({"_id": ObjectId(datastatid)})
 
-    # Find data metadata
-    dataset_id = stats['datasets_id']
-    metadata = datasets_collection.find_one({"_id": dataset_id})
+    return render_template('viewdata.html', stats = stats)
 
-    stats['title'] = metadata['title']
-    stats['author'] = metadata['author']
-    stats['description'] = metadata['description']
-    stats['local'] = metadata['local']
+# Retrieve all data stat sets from the database
+@data.route('/gallery', methods=['GET'])
+def gallery():
 
-    return json.loads(json_util.dumps(stats))
+    # Connect to mongo stats collcetion
+    db = mongo.get_database('diff-priv-data')
+    datastats_collection = db.data_stats
+
+    stats = datastats_collection.find()
+
+    # for s in stats:
+    #     print(s['title'] + s['description'] + str(s['_id']))
+
+    return render_template('gallery.html', stats = stats)
 
 from app import mongo

@@ -32,7 +32,7 @@ def driver_global_algo(data: dict, stats: dict):
     result = {}
 
     # Get column names to compute global stats
-    col_names = data.keys()
+    col_names = [x.lower() for x in stats.keys()]
 
     # Iterate over column names
     for col in col_names:

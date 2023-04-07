@@ -20,7 +20,7 @@ function form() {
     for(var i=0; i< form.elements.length; i++ ) {
         var fieldName = form.elements[i].name;
         var fieldValue = form.elements[i].value;
-        console.log(fieldName + ": " + fieldValue)
+        // console.log(fieldName + ": " + fieldValue)
 
         if (fieldName === "col_name") {
             currFKey = fieldValue;
@@ -51,7 +51,7 @@ function form() {
 
 /*------ Method for read uploded csv file ------*/
 function upload() {
-       
+    console.log('HERE')
     let input = document.getElementById('csvFile');
     input.addEventListener('change', function() {
     
@@ -68,7 +68,7 @@ function upload() {
             // parse(csvdata); // calling function for parse csv data 
         });
         
-        console.log(reader.readAsBinaryString(myFile));
+        reader.readAsBinaryString(myFile);
         
     }
     });
@@ -102,12 +102,9 @@ async function sendData(csvdata, formdata) {
         url: "/upload",
         contentType: "application/json",
         data: JSON.stringify(payload),
-        dataType: "json",
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(err) {
-            console.log(err);
+        success: function(res) {
+            console.log(res);
+            window.location.replace(window.location.origin + res)
         }
     });
 } 
