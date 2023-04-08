@@ -1,6 +1,82 @@
 import math
 import numpy as np
-from bitstring import BitArray
+##from bitstring import BitArray
+
+
+"""
+We pass a file remove the header 
+
+We have 10 columns 
+
+get the domain range of 10 columns. 
+
+Create a list of array of this. 
+
+match our values and update the numbers. 
+
+prtuern the data. 
+
+"""
+
+##class ue_encode():
+
+
+def main(domain, response):
+       print (domain, response)
+       encode_array = np.zeros(len(domain))
+       for k in domain:
+        if response == k :
+            encode_array[domain.index(k)]=1
+            a=_peturb (0.25,0.75,encode_array)
+            print (a)
+
+def _peturb(p,q,encode_array):
+     sanitized_vec = np.zeros(4)
+     for bit in range(4):
+       sample = np.random.random()
+       if encode_array[bit] == 1:
+        if sample <= p:
+            sanitized_vec[bit] = 1
+       else:
+        if sample <= q:
+            sanitized_vec[bit] = 1
+     return sanitized_vec
+
+
+__name__ == '__main__'
+
+domain =[1,2,3,4]
+main(domain,4)
+
+
+    
+
+"""
+    def _peturb(self,p,q, data)
+         for index in encode_array:
+            if index == 1 and rnd <=p; 
+      """         
+"""
+     
+    def aggregate :
+         p and q ka vlaue chaiye 
+
+
+
+    def elipson_to_p_q(self, elipson):
+        # elipson. 
+
+
+def _encode_(elpsion)
+    if; 
+    uae. encode. 
+
+__name__= __main__
+
+
+
+
+
 
 def encode(num):
     bits = int(max(8, math.log(num, 2)+1))
@@ -32,3 +108,5 @@ for age in nums:
 
 print(sum(nums)/len(nums))
 print(sum(nums_dp)/len(nums_dp))
+
+"""
