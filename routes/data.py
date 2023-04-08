@@ -2,6 +2,7 @@ from flask import Blueprint, request, Response, redirect, url_for, render_templa
 from scripts.driver.format import csv_format
 from scripts.driver.global_driver import driver_global_algo
 from bson.objectid import ObjectId
+from routes.db import mongo
 import json
 from bson import json_util
 
@@ -73,5 +74,3 @@ def gallery():
     #     print(s['title'] + s['description'] + str(s['_id']))
 
     return render_template('gallery.html', stats = stats)
-
-from app import mongo

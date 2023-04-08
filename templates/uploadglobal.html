@@ -14,8 +14,8 @@
       crossorigin="anonymous"
     />
 
-    <link href="../static/nav.css" rel="stylesheet" />
-    <link href="../static/upload.css" rel="stylesheet" />
+    <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet" />
+    <link href={{url_for('static', filename='style/upload.css')}} rel="stylesheet" />
 
     <title>Safely Stat</title>
   </head>
@@ -132,8 +132,8 @@
     {% include 'footer.html' %}
 
     <!-- Scripts -->
-    <script src="../static/format.js"></script>
-    <script src="../static/upload.js"></script>
+    <script src={{url_for('static', filename='scripts/format.js')}} rel="stylesheet"></script>
+    <script src={{url_for('static', filename='scripts/upload.js')}} rel="stylesheet"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
