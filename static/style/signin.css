@@ -1,0 +1,33 @@
+.gradient-custom-2 {
+    background-color: rgb(163, 165, 190);
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* background: linear-gradient(45deg, rgb(248,248,255), rgb(193, 193, 228), rgb(205, 205, 212), rgb(163, 165, 190)); */
+
+}
+
+.card {
+    background-color: #eee;
+    box-shadow: 0 0 5px rgb(230, 230, 230);
+    border-style: none;
+}
+
+.login-btn {
+    color: white;
+}
+
+.login-btn:hover {
+    color: rgb(163, 165, 190);
+    background-color: white;
+}
+
+.new-btn {
+    color: rgb(163, 165, 190);
+    border-color: rgb(163, 165, 190);
+}
+
+.new-btn:hover {
+    background-color: rgb(163, 165, 190);
+    color: white;
+    border-color: rgb(163, 165, 190);
+}

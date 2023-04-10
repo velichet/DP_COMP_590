@@ -69,3 +69,20 @@ html, body {
 .f-con {
   margin-left: 1.5rem;
 }
+
+.signout-btn {
+  background-color: white;
+  color: black;
+  padding: 0.25rem;
+  border-radius: 3px;
+}
+
+.signout-btn:hover {
+  transition: 0.5s;
+  color: black;
+  padding: 0.4rem;
+}
+
+a {
+  text-decoration: none;
+}

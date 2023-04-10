@@ -84,12 +84,13 @@
               <a class="nav-link" href="{{ url_for('page.about') }}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('data.gallery') }}">Gallery</a>
+              <a class="nav-link" href="{{ url_for('page.gallery') }}">Gallery</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('page.mydata') }}">MyData</a>
             </li>
           </ul>
+          <a class="signout-btn" href="{{ url_for('page.mydata') }}">Logout</a>
         </div>
       </div>
     </nav>

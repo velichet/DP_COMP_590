@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from routes.db import mongo
 
 page = Blueprint('page', __name__)
 
@@ -12,10 +13,31 @@ def index():
 def about():
     return render_template('about.html')
 
+# Retrieve all data stat sets from the database
+@page.route('/gallery', methods=['GET'])
+def gallery():
+
+    # Connect to mongo stats collcetion
+    db = mongo.get_database('diff-priv-data')
+    datastats_collection = db.data_stats
+
+    stats = datastats_collection.find()
+
+    return render_template('gallery.html', stats = stats)
+
 # Display MyData page
 @page.route('/mydata')
 def mydata():
-    return render_template('mydata.html')
+
+    # Connect to mongo stats collcetion
+    db = mongo.get_database('diff-priv-data')
+    datastats_collection = db.data_stats
+
+    # Get signed in users datasets
+    user_id = 0 # GET USER ID // THIS IS TEMP
+    stats = datastats_collection.find({"user_id": user_id})
+
+    return render_template('mydata.html', stats = stats)
 
 # Display Upload page for global
 @page.route('/upload-global')

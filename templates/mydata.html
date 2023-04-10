@@ -16,6 +16,7 @@
 
     <link href={{url_for('static', filename='style/mydata.css')}} rel="stylesheet" />
     <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet" />
+    <link href={{url_for('static', filename='style/gallery.css')}} rel="stylesheet" />
 
     <title>Safely Stat</title>
   </head>
@@ -87,7 +88,33 @@
 
       <!-- User datasets -->
       <div class="row">
-        <h3>datasets</h3>
+        <div class="g-grad">
+          <h1 class="g-title mt-2 text-center">My Gallery Pieces</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        {%for s in stats%}
+
+        
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <a href= {{ url_for( 'data.get_datastats' , datastatid = s['_id']) }} >
+            <div class="card gallery-card">
+              <div class="card-body">
+                <h5 class="card-title g-text">{{s['title']}}</h5>
+                <p class="card-text g-desc">
+                  {{s['description']}}
+                </p>
+                <p class="card-text g-text">
+                  Created by {{s['author']}}
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      
+
+      {%endfor%}
       </div>
 
     </div>

@@ -59,18 +59,3 @@ def get_datastats(datastatid):
     stats = datastats_collection.find_one({"_id": ObjectId(datastatid)})
 
     return render_template('viewdata.html', stats = stats)
-
-# Retrieve all data stat sets from the database
-@data.route('/gallery', methods=['GET'])
-def gallery():
-
-    # Connect to mongo stats collcetion
-    db = mongo.get_database('diff-priv-data')
-    datastats_collection = db.data_stats
-
-    stats = datastats_collection.find()
-
-    # for s in stats:
-    #     print(s['title'] + s['description'] + str(s['_id']))
-
-    return render_template('gallery.html', stats = stats)

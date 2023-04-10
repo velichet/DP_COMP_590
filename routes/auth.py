@@ -1,22 +1,26 @@
 from routes.db import mongo
-from flask import Blueprint, redirect, url_for
+from flask import Blueprint, redirect, url_for, render_template
 
 auth = Blueprint('auth', __name__)
 
 # Redirect
 @auth.route('/')
-def redirect():
-    if(False):
+def landing_page():
+    if(False): # IF USER IS SIGNED IN GOTO HOME PAGE
         return redirect(url_for('page.home'))
-    else:
+    else: # ELSE GOTO SIGNIN PAGE
         return redirect(url_for('auth.signin'))
 
 # Sign in to account
-@auth.route('/signin', methods = ['POST'])
+@auth.route('/sign-in')
 def signin():
-    return redirect(url_for('page.index'))
+    return render_template('signin.html')
 
 # Sign up for account
-@auth.route('/signiup', methods = ['POST'])
+@auth.route('/signup')
 def signup():
+    return render_template('signup.html')
+
+@auth.route('/signout')
+def signout():
     return

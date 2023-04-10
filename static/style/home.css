@@ -57,6 +57,11 @@
   box-shadow: 0 0 5px rgb(230, 230, 230);
 }
 
+.card:hover {
+  transition: 1s;
+  background-color: rgb(227, 227, 255);
+}
+
 p  {
   font-weight: 300;
 }
