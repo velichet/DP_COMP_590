@@ -17,10 +17,10 @@ def signin():
     return render_template('signin.html')
 
 # Sign up for account
-@auth.route('/signup')
+@auth.route('/sign-up')
 def signup():
     return render_template('signup.html')
 
-@auth.route('/signout')
+@auth.route('/sign-out')
 def signout():
     return
