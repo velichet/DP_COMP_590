@@ -9,9 +9,9 @@ def index():
     return render_template('index.html')
 
 # About page
-@page.route('/about')
-def about():
-    return render_template('about.html')
+@page.route('/resources')
+def resources():
+    return render_template('resources.html')
 
 # Retrieve all data stat sets from the database
 @page.route('/gallery', methods=['GET'])

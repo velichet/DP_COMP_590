@@ -50,8 +50,20 @@ html, body {
     display: flex;
 }
 
-.footer-item {
+/* .footer-item {
     margin: 1rem;
+} */
+
+.foot-container {
+  position: relative;
+}
+
+.f-con {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin-left: 2rem;
 }
 
 .black-bg {
@@ -59,28 +71,27 @@ html, body {
 }
 
 .white {
-  color: lightgray;
+  color: white;
 }
 
 .bg-dark {
   background-color: black !important;
 }
 
-.f-con {
-  margin-left: 1.5rem;
-}
-
 .signout-btn {
   background-color: white;
   color: black;
   padding: 0.25rem;
-  border-radius: 3px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
 }
 
 .signout-btn:hover {
   transition: 0.5s;
-  color: black;
-  padding: 0.4rem;
+  color: white;
+  background-color: black;
 }
 
 a {

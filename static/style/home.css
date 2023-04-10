@@ -46,7 +46,7 @@
   border-color: black;
 }
 .upload-btn:hover {
-  color:lightgray;
+  color:white;
   background-color: black;
 }
 
@@ -62,6 +62,31 @@
   background-color: rgb(227, 227, 255);
 }
 
+.content-bg {
+  background-color: rgb(227, 227, 255);
+}
+
+.card-alt {
+  background-color: rgb(227, 227, 255);
+}
+
 p  {
   font-weight: 300;
+}
+
+.img-logo {
+  width: 100px;
+  justify-content: center;
+}
+
+.mid-content {
+  margin-bottom: 4rem;
+}
+
+.mid-content2 {
+  margin-bottom: 3rem;
+}
+
+.hideme {
+  opacity: 0;
 }

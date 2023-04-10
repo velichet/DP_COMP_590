@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="icon" href={{url_for('static', filename='utils/logo.png')}}>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- Bootstrap CSS -->
     <link
@@ -34,8 +36,7 @@
           <h1 class="display-4 font-weight-normal h-text">Safely Stat</h1>
           <p class="lead font-weight-normal h-text">A Differential Privacy Platform</p>
           <a class="btn btn-outline-secondary upload-btn" href="{{ url_for('page.mydata') }}"
-            >Upload Your Data</a
-          >
+            >Upload Your Data</a>
         </div>
         <div class="product-device shadow-sm d-none d-md-block"></div>
         <div
@@ -43,50 +44,72 @@
         ></div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+      <div class="row mid-content">
+        <div class="col-sm-12 mt-4">
+          <h1 class="text-center">The Future of Data Sharing</h1>
+        </div>
+        <div class="col-sm-12 mt-3 text-center">
+          <h5 class="lead font-weight-normal mid-content2">Differential Privacy is used by</h5>
+          <div class="d-flex justify-content-around mt-4">
+            <img class="img-logo hideme" src={{url_for('static', filename='utils/google.png')}}>
+            <img class="img-logo hideme" src={{url_for('static', filename='utils/apple.png')}}>
+            <img class="img-logo hideme" src={{url_for('static', filename='utils/uscensus.png')}}>
+            <img class="img-logo hideme" src={{url_for('static', filename='utils/microsoft.png')}}>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mb-4 hideme">
+        <div class="col-sm-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">About</h5>
+              <h5 class="card-title text-center">The Gallery</h5>
               <p class="card-text">
-                This project was created by two students at the University of North Carolina at
-                Chapel Hill.
+                Visit The Gallery to discover Gallery Pieces curated by users and made 
+                private by Safely Stat.
               </p>
+              <div class="text-center">
+                <a class="btn btn-outline-secondary upload-btn" href="{{ url_for('page.gallery') }}"
+                >The Gallery</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+        <div class="col-sm-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Differential Privacy</h5>
-              <p class="card-text">Differential Privacy is...</p>
+              <h5 class="card-title text-center">MyData</h5>
+              <p class="card-text">
+                To view your profile information, upload datasets, and view 
+                all of your Gallery Pieces visit MyData.
+              </p>
+              <div class="text-center">
+                <a class="btn btn-outline-secondary upload-btn" href="{{ url_for('page.mydata') }}"
+                >MyData</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+        <div class="col-sm-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Choosing Epsilon</h5>
+              <h5 class="card-title text-center">Learn</h5>
               <p class="card-text">
-                Epsilon is the privacy parameter...
+                If you're interested in learning about Safely Stat and the tools 
+                that make it possible, visit the Resources page.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Learn More</h5>
-              <p class="card-text">
-                To learn more about Differential Privacy and the tools that power this site, visit...
-              </p>
+              <div class="text-center">
+                <a class="btn btn-outline-secondary upload-btn" href="{{ url_for('page.resources') }}"
+                >Resources</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
 
     {% include 'footer.html' %}
@@ -97,5 +120,30 @@
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous"
   ></script>
+  <script>
+    $(document).ready(function() {
+    
+    /* Every time the window is scrolled ... */
+    $(window).scroll( function(){
+    
+        /* Check the location of each desired element */
+        $('.hideme').each( function(i){
+            
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            
+            /* If the object is completely visible in the window, fade it it */
+            if( bottom_of_window > bottom_of_object ){
+                
+                $(this).animate({'opacity':'1'},1000);
+                    
+            }
+            
+        }); 
+    
+    });
+    
+});
+  </script>
   </body>
 </html>

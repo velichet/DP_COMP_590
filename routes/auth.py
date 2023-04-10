@@ -11,16 +11,29 @@ def landing_page():
     else: # ELSE GOTO SIGNIN PAGE
         return redirect(url_for('auth.signin'))
 
-# Sign in to account
+# Display page for sign-in
 @auth.route('/sign-in')
 def signin():
     return render_template('signin.html')
 
-# Sign up for account
+# Display page for sign-up
 @auth.route('/sign-up')
 def signup():
     return render_template('signup.html')
 
+# Log in API
+@auth.route('/login')
+def login():
+    # CHANDRA CODE
+    return 
+
+# Add new user
+@auth.route('/new-user')
+def new_user():
+    # CHANDRA CODE
+    return
+
+# API for logging out
 @auth.route('/sign-out')
 def signout():
     return
