@@ -60,3 +60,7 @@ a {
 		background-position: 0% 50%;
 	}
 }
+
+p {
+    font-weight: 300;
+}
