@@ -19,6 +19,8 @@
     <link href={{url_for('static', filename='style/home.css')}} rel="stylesheet" />
     <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Safely Stat</title>
   </head>
   <body>
@@ -44,23 +46,60 @@
         ></div>
       </div>
 
-      <div class="row mid-content">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-body content-pad">
+              <h5 class="card-title text-center">What is Safely Stat?</h5>
+              <p class="card-text text-center">
+                Safely Stat is an open source platform that provides differentially private
+                statistics on datasets in both the local and global model. To learn more about
+                differential privacy and how to use the power of Safely Stat. Visit the Resources.
+              </p>
+              <div class="text-center">
+                <a class="btn btn-outline-secondary upload-btn" href="{{ url_for('page.resources') }}"
+                >Resources</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-body content-pad">
+              <h5 class="card-title text-center">Contribute</h5>
+              <p class="card-text text-center">
+                Safely Stat was created by two students at the University of North Carolina
+                at Chapel Hill, but this is a community effortas we use OpenMined's and Google's algorithms. 
+                To contribute to this project click on the icon below to visit the 
+                GitHub repository.
+              </p>
+              <div class="text-center">
+                <a href="https://github.com/velichet/DP_COMP_590"
+                ><i class="fa fa-github" style="font-size:38px; color: black;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mid-content hideme">
         <div class="col-sm-12 mt-4">
           <h1 class="text-center">The Future of Data Sharing</h1>
         </div>
         <div class="col-sm-12 mt-3 text-center">
           <h5 class="lead font-weight-normal mid-content2">Differential Privacy is used by</h5>
           <div class="d-flex justify-content-around mt-4">
-            <img class="img-logo hideme" src={{url_for('static', filename='utils/google.png')}}>
-            <img class="img-logo hideme" src={{url_for('static', filename='utils/apple.png')}}>
-            <img class="img-logo hideme" src={{url_for('static', filename='utils/uscensus.png')}}>
-            <img class="img-logo hideme" src={{url_for('static', filename='utils/microsoft.png')}}>
+            <img class="img-logo" src={{url_for('static', filename='utils/google.png')}}>
+            <img class="img-logo" src={{url_for('static', filename='utils/apple.png')}}>
+            <img class="img-logo" src={{url_for('static', filename='utils/uscensus.png')}}>
+            <img class="img-logo" src={{url_for('static', filename='utils/microsoft.png')}}>
           </div>
         </div>
       </div>
 
 
-      <div class="row mb-4 hideme">
+      <div class="row mb-4">
         <div class="col-sm-4">
           <div class="card">
             <div class="card-body">

@@ -16,58 +16,265 @@
       crossorigin="anonymous"
     />
 
-    <link href={{url_for('static', filename='style/home.css')}} rel="stylesheet" />
-    <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet" />
+    <link href={{url_for('static', filename='style/home.css')}} rel="stylesheet"
+    /> <link href={{url_for('static', filename='style/nav.css')}}
+    rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <title>Safely Stat</title>
   </head>
   <body>
     <div class="container-fluid">
-
       {% include 'nav.html' %}
       <!-- Partial Boostrap Nav -->
 
-      <!-- Header -->
       <div class="row">
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+        <div class="g-grad">
+          <h1 class="text-center mt-2 h-title">Resources</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">About</h5>
+              <h5 class="card-title text-center">Differential Privacy</h5>
               <p class="card-text">
-                This project was created by two students at the University of North Carolina at
-                Chapel Hill.
+                Differential Privacy (DP) was introduced by <a href="https://iacr.org/archive/tcc2006/38760266/38760266.pdf">
+                Dwork et al</a>. This seminal work has paved the way for Differential Privacy as numerous companies
+                and governments have adopted this technology.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Differential Privacy</h5>
-              <p class="card-text">Differential Privacy is...</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Choosing Epsilon</h5>
+              <h5 class="card-title text-center">What is DP?</h5>
               <p class="card-text">
-                Epsilon is the privacy parameter...
+                Differential Privacy allows for datasets containing sensitive data to be shared
+                without exposing individual data points. This done by injecting noise (randomness) into the 
+                dataset. This <a href="https://www.youtube.com/watch?v=-JRURYTfBXQ">video</a> from NIST explains DP.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 mt-3 mb-3">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Learn More</h5>
+              <h5 class="card-title text-center">How does DP work?</h5>
               <p class="card-text">
-                To learn more about Differential Privacy and the tools that power this site, visit...
+                DP requires data curaors (third party) to collect data from data producers. The curator allows 
+                data consumers to query the datasets. The curator answers these queries with differentially private 
+                responses.
               </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">What is Local DP?</h5>
+              <p class="card-text">
+                Local DP is a model of DP in which the data that is sent to the curator (third party)
+                is injuected with noise before the curator has access to the data. This makes it possible 
+                for the third party to be untrusted.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">What is Global DP?</h5>
+              <p class="card-text">
+                Global (or central) DP is a model of DP in which raw data is sent to the curator (third party).
+                This requires a trusted-third party to be available, however, the query results tend to be
+                more accurate in this model.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Choosing Epsilon</h5>
+              <p class="card-text">
+                In DP, epsilon is the privacy parameter. The closer to zero that epsilon is, the more 
+                randomness will be injected into the dataset.
+                Checkout datasets titled "Test" in The Gallery to see the effect of epsilon.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="g-grad">
+          <h1 class="text-center mt-2 h-title">Using Safely Stat</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Navigating</h5>
+              <p class="card-text p-2">
+                Safely Stat currently consists of a few pages: Home, Resources, Gallery,
+                MyData. Home and Resources provide information on DP and other important
+                information on using the platform. The Gallery contains all uploaded datasets.
+                MyData contains profile information, user's uploaded datasets, and serves as the 
+                portal to uploaded more datasets.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Upload Datasets</h5>
+              <ol>
+                <li><p class="card-text">Go to MyData</p></li>
+                <li><p class="card-text">For Global DP press Global Uploads. For Local DP press Local Uploads.</p></li>
+                <li><p class="card-text">Fill out all of the information on the form. Verify that all the information is correct.</p></li>
+                <li><p class="card-text">Upload your dataset in CSV format. Once you do this your Gallery Piece will be generated.</p></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Proper Formatting</h5>
+              <p class="card-text p-1">
+                Ensure your CSV is formatted properly. The below example contains 
+                fields (columns): age; height; weight.
+                <code style="display: block; white-space: pre-wrap">
+                  age,height,weight
+                  30,70,200
+                  53,65,130
+                  44,58,105
+                </code>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="g-grad">
+          <h1 class="text-center mt-2 h-title">Algorithms</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Safely Stat</h5>
+              <p class="card-text">
+                This project would not be possible without the work of OpenMinded and 
+                Google. The open source Differential Privacy projects of these two 
+                organizations has made this site possible. To see how we implemented
+                these algorithms, visit the Safely Stat repo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">OpenMinded</h5>
+              <p class="card-text">
+                Safely Stat's Global DP solution makes use of OpenMinded's Python Laplacian
+                functions. To learn more about this project, click on the GitHub icon below.
+              </p>
+              <div class="text-center">
+                <a href="https://github.com/OpenMined/PyDP"
+                ><i class="fa fa-github" style="font-size:32px; color: black;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Google</h5>
+              <p class="card-text">
+                Safely Stat's Local DP solution is made in-house, however, heavy inspiration
+                was drawn from Google's RAPPOR solution. Click on the icon to learn more.
+              </p>
+              <div class="text-center">
+                <a href="https://github.com/google/rappor"
+                ><i class="fa fa-github" style="font-size:32px; color: black;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="g-grad">
+          <h1 class="text-center mt-2 h-title">About</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Founders</h5>
+              <p class="card-text">
+                This project was created by two students, Matthew Gilmore and
+                Chandramouli Velicheti, at the University of North Carolina at
+                Chapel Hill with the assistance of Professor Saba Eskandarian.
+                Visit the GitHub repo on the Home page to learn more about the project.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Matthew Gilmore</h5>
+              <p class="card-text">
+                Matthew is an undergraduate student at UNC Chapel Hill, majoring
+                in Computer Science. To learn more about Matthew and his work, check
+                out his GitHub page.
+              </p>
+              <div class="text-center">
+                <a href="https://github.com/mattsg6"
+                ><i class="fa fa-github" style="font-size:32px; color: black;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-3 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Chandramouli Velicheti</h5>
+              <p class="card-text">
+                Chandra is a graduate student at UNC Chapel Hill, studying Information
+                Science. To learn more about Chandra and his work, check out his GitHub page.
+              </p>
+              <div class="text-center">
+                <a href="https://github.com/velichet"
+                ><i class="fa fa-github" style="font-size:32px; color: black;"></i></a>
+              </div>
             </div>
           </div>
         </div>
@@ -78,9 +285,9 @@
     <!-- <script src="../static/format.js"></script> -->
 
     <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-    crossorigin="anonymous"
-  ></script>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
