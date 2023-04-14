@@ -16,7 +16,10 @@ def upload():
     payload = request.json
 
     # Format the CSV data for insertion
-    data = csv_format(payload['data'])
+    if(payload['local'] is False):
+        data = csv_format(payload['data'])
+    else:
+        data = []
 
     # Get mongoDB collection
     db = mongo.get_database('diff-priv-data')
@@ -29,21 +32,26 @@ def upload():
         "local": payload['local']
         })
 
+
+    stats = {}
     # If global algorithms if specified
     if(payload['local'] is False):
         stats = driver_global_algo(data, payload['stats'])
+    else:
+        field = payload['stats'].keys()
+        field = list(field)[0].lower()
+        stats[field] = {"count": payload['data']}
 
-        # Get data_stats collection
-        datastats_collection = db.data_stats
-        datastats_collection.insert_one({
-            "datasets_id": _id.inserted_id,
-            "user_id": 0, # TEMP NEED USER AUTH
-            "stats": stats,
-            "title": payload['title'],
-            "description": payload['description'],
-            "author": "author", # TEMP NEED USER AUTH,
-            "stats_data": payload['stats']
-        })
+    datastats_collection = db.data_stats
+    datastats_collection.insert_one({
+        "datasets_id": _id.inserted_id,
+        "user_id": 0, # TEMP NEED USER AUTH
+        "stats": stats,
+        "title": payload['title'],
+        "description": payload['description'],
+        "author": "author", # TEMP NEED USER AUTH,
+        "stats_data": payload['stats']
+    })
     
     return url_for('page.mydata')
 

@@ -51,7 +51,6 @@ function form() {
 
 /*------ Method for read uploded csv file ------*/
 function upload() {
-    console.log('HERE')
     let input = document.getElementById('csvFile');
     input.addEventListener('change', function() {
     

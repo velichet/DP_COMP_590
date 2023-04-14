@@ -8,7 +8,7 @@
     <link rel="icon" href={{url_for('static', filename='utils/logo.png')}}>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script defer src="https://pyscript.net/releases/2022.12.1/pyscript.js"></script>
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 
     <!-- Bootstrap CSS -->
     <link
@@ -18,8 +18,9 @@
       crossorigin="anonymous"
     />
 
-    <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet" />
-    <link href={{url_for('static', filename='style/upload.css')}} rel="stylesheet" />
+    <link href={{url_for('static', filename='style/nav.css')}} rel="stylesheet"
+    /> <link href={{url_for('static', filename='style/upload.css')}}
+    rel="stylesheet" />
 
     <title>Safely Stat</title>
   </head>
@@ -51,73 +52,130 @@
 
             <!-- Stats -->
             <div id="stats" class="mt-4 border-top">
-                <h5 class="mt-3">Field Statistics</h5>
-                <p class="mt-2 mb-2 container-fluid">In the following section, specify the field (column) in 
-                    your dataset you wish to include in the gallery piece. We currently only have support
-                    for count measurements in the local mode. Please note, when you upload 
-                    your CSV dataset, your data will be automatically uploaded and you will be redirected 
-                    to your MyData page.
-                </p>
-                <div class="container-fluid" id="add-col-btn">
-                    <div class="row" id="col-stat-box">
-                        <div class="col-sm-12">
-                            <label for="columnTitle" class="form-label mt-2">Field Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="columnTitle"
-                              placeholder="Field one"
-                              name="col_name"
-                            />
+              <h5 class="mt-3">Field Statistics</h5>
+              <p class="mt-2 mb-2 container-fluid">
+                In the following section, specify the field (column) in your
+                dataset you wish to include in the gallery piece. We currently
+                only have support for count measurements in the local mode.
+                Please note, when you upload your CSV dataset, your data will be
+                automatically uploaded and you will be redirected to your MyData
+                page.
+              </p>
+              <div class="container-fluid" id="add-col-btn">
+                <div class="row" id="col-stat-box">
+                  <div class="col-sm-6">
+                    <label for="columnTitle" class="form-label mt-2"
+                      >Field Name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="columnTitle"
+                      placeholder="Field one"
+                      name="col_name"
+                    />
+                  </div>
 
-                        </div>
-                    </div>
+                  <div class="col-sm-6">
+                    <label for="epsilon" class="form-label mt-2">Epsilon</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="epsilon"
+                      placeholder="0"
+                      name="col_name"
+                    />
+                  </div>
                 </div>
+              </div>
             </div>
             <!-- Stats -->
             <div class="border-top mt-3">
-            <h5 class="mt-3">Upload CSV Dataset</h5>
-            <label for="formFile" class="form-label">CSV File</label>
-            <input class="form-control" type="file" id="csvFile">
-          </div>
+              <h5 class="mt-3">Upload CSV Dataset</h5>
+              <label for="formFile" class="form-label">CSV File</label>
+              <input class="form-control" type="file" id="csvFile" />
+            </div>
           </form>
         </div>
       </div>
     </div>
 
-    <py-script>
-      import js
-      from pyodide.ffi.wrappers import add_event_listener
-      import asnycio
-      import json
-      from request import request
+    <script>
+      function form() {
+        var form = document.forms.dataInput;
 
-      async def upload_and_run(event):
-        baseurl = js.window.location.origin
+        var obj = {
+          title: form.datasetTitle.value,
+          description: form.datasetDesc.value,
+          local: true,
+        };
 
-        title = Element('datasetTitle').value
-        desc = Element('datasetDesc').value
-        field = Element('columnTitle').value
-        dataset = Element('csvFile').value
+        var stats = {};
 
-        # LOCAL DP CODE
+        stats[form.columnTitle.value] = {
+          "count": {
+            epsilon: form.epsilon.value
+          }
+          
+        };
 
-        # POST REQUEST
-        headers = {"Content-type": "application/json"}
-        body = json.dumps({
-          "title": title,
-          "description": description,
-          "local": true
-          ... # FINISH THIS
-        })
-        post = await request(f"{baseurl}/upload", body=body, method="POST", headers = headers)
-        print(f"POST request=> status:{new_post.status}, json:{await new_post.json()}")
+        obj["stats"] = stats;
 
-      csv_input = js.document.getElementById('csvFile')
-      add_event_listener(csv_input, "change", upload_and_run())
-      asyncio.ensure_future(upload_and_run())
+        return obj;
+      }
+
+      function csvData() {
+        let input = document.getElementById("csvFile");
+        input.addEventListener("change", function () {
+          var formdata = form();
+          if (this.files && this.files[0]) {
+            var myFile = this.files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function (e) {
+              let csvdata = e.target.result;
+              sendData(csvdata, formdata)
+              // parse(csvdata); // calling function for parse csv data
+            });
+
+            reader.readAsBinaryString(myFile);
+          }
+        });
+      }
+
+      async function sendData(csvdata, formdata) {
+
+        var localDP = pyscript.interpreter.globals.get('local_algo')
+        const data = localDP(csvdata, document.forms.dataInput.columnTitle.value)
+
+        payload = {
+          data: data,
+          title: formdata.title,
+          description: formdata.description,
+          local: formdata.local,
+          stats: formdata.stats,
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "/upload",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+          success: function (res) {
+            console.log(res);
+            window.location.replace(window.location.origin + res);
+          },
+        });
+      }
+
+      csvData();
+    </script>
+
+    <py-script> 
+      def local_algo(csv_data, field): 
+        return 50 
     </py-script>
-    
+
     {% include 'footer.html' %}
 
     <!-- Scripts -->
