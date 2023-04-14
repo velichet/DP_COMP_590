@@ -19,7 +19,7 @@ To start running the app use the following command. It should run on localhost p
 python app.py
 ```
 
-To connect to your MongoDB instance, create a .env file and update it with your user specific link which can be found on MongoDB when you choose to connect to a Python application. Below is what your .env file should contain (the brackets should not be included).
+To connect to your MongoDB instance, create a .env file and update it with your user specific link which can be found on MongoDB when you choose to connect to a Python application. Below is what your .env file should contain (the brackets should not be included). Be sure to whitelist your IP address in Mongo Atlas.
 ```
 MONGO_URI = <link>
 ```
