@@ -1,34 +1,128 @@
-import math
 import numpy as np
-from bitstring import BitArray
+import math
+import random
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
 
-def encode(num):
-    bits = int(max(8, math.log(num, 2)+1))
-    return [1 if num & (1 << (bits-1-n)) else 0 for n in range(bits)]
 
-def perturb(encoded_response):
-    return [perturb_bit(b) for b in encoded_response]
+def label_data(col):
+    """ 
+    Label encoder for target column values
+    
+    1) col : Target/user specified column
 
-def perturb_bit(bit):
-    p = .8
-    q = .05
+    """
+    
+    LE = LabelEncoder()    
+    interger_label = LE.fit_transform(col)
+    
+    return interger_label
 
-    sample = np.random.random()
-    if bit == 1:
-        if sample <= p:
-            return 1
-        else:
-            return 0
-    elif bit == 0:
-        if sample <= q:
-            return 1
-        else: 
-            return 0
+
         
-nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]
-nums_dp = []
-for age in nums:
-    nums_dp.append(BitArray(perturb(encode(age))).uint)
+def convert_epsilon(epsilon):
+    """ 
+    Function to convert epsilon to prob p and q
+    
+    1) epsilon : epsilon
+    
+    """
+    
+    const = math.pow(math.e, epsilon/2)
+    p = const / (const + 1)
+    q = 1-p
+    
+    return p ,q 
+    
 
-print(sum(nums)/len(nums))
-print(sum(nums_dp)/len(nums_dp))
+
+def encode(input_data,d):
+    
+    """ 
+    Function to encode data into the vector
+    
+    1) input_data : raw data from the user
+    
+    2) d : domain size of the column mentioned by user
+    
+    """
+    
+    ue_data = np.zeros(d)
+    
+    if input_data:
+        ue_data[input_data] = 1
+        
+    return ue_data
+
+
+
+            
+def __perturb(ue_data, p ,q, d):    
+    
+    """ 
+    Function to peturb the vector
+    
+    1) ue_data : encoded data 
+    
+    2) d : domain size of the column mentioned by user 
+    
+    3) p : probability p used to flip the bits in the array 
+    
+    4) q : probability q used to flip the bits in the array 
+    
+    """
+    
+    peturb_vec = np.zeros(d)
+
+    for index in range(d):
+        
+        if ue_data[index] == 0:
+            
+            rnd = np.random.random()
+            if rnd <= q:
+                peturb_vec[index] = 1
+        else:
+            
+            rnd = np.random.random()
+            if rnd <= p:
+                peturb_vec[index] = 1
+                
+    return peturb_vec
+
+      
+
+def local_dp(epsilon, col, data):
+    
+    """ 
+    Function to peturb the vector
+    
+    1) epsilon : epsilon value 
+    
+    2) col : Target/user specified column
+    
+    3) data : The data should be a Dataframe  
+    
+    """
+    
+    domain = np.unique(data[col])
+    size = domain.size
+    
+    p , q = convert_epsilon(epsilon)
+    peturb_vect = []
+    
+    for instance in label_data(data[col]):
+        
+     ue_data_vec = encode(instance,size)
+     peturb_vec =  __perturb(ue_data_vec,p,q,size)
+        
+     peturb_vect.append(peturb_vec)
+   
+
+    estimate_values =  np.array((sum(peturb_vect) - q * len(peturb_vect)) / (p-q)).clip(0)
+     
+    
+    return   { col : domain,
+              'count' : estimate_values.astype(int)
+             }
+
+    
