@@ -1,7 +1,7 @@
 # DP_COMP_590
 As part of our COMP 590 project, we will implement differential privacy for datasets.
 
-It's recommended to run the app in a virtual environment. Below are the steps to do that.
+It's recommended to run the app in a virtual environment. Below are the steps to do that.  
 ```
 # Create virtual environment
 python3 -m venv ./<name_of_virtualenv>
