@@ -22,18 +22,6 @@
     /> <link href={{url_for('static', filename='style/upload.css')}}
     rel="stylesheet" />
 
-    <!-- <py-config>
-      
-
-      [[fetch]]
-      from = '../static/scripts/'
-      files = ['local_algos.py']
-    </py-config> -->
-
-    <py-config>
-      packages = ["numpy", "pandas", "scikit-learn"]
-    </py-config>
-
     <title>Safely Stat</title>
   </head>
   <body>
@@ -125,10 +113,9 @@
         var stats = {};
 
         stats[form.columnTitle.value] = {
-          "count": {
-            epsilon: form.epsilon.value
-          }
-          
+          count: {
+            epsilon: form.epsilon.value,
+          },
         };
 
         obj["stats"] = stats;
@@ -146,7 +133,7 @@
 
             reader.addEventListener("load", function (e) {
               let csvdata = e.target.result;
-              sendData(csvdata, formdata)
+              sendData(csvdata, formdata);
               // parse(csvdata); // calling function for parse csv data
             });
 
@@ -156,12 +143,15 @@
       }
 
       async function sendData(csvdata, formdata) {
+        var localDP = pyscript.interpreter.globals.get("local_dp");
+        const data = localDP(
+          document.forms.dataInput.epsilon.value,
+          document.forms.dataInput.columnTitle.value,
+          csvdata
+        );
 
-        var localDP = pyscript.interpreter.globals.get('local_dp')
-        const data = localDP(document.forms.dataInput.epsilon.value, document.forms.dataInput.columnTitle.value, csvdata)
+        console.log(data);
 
-        console.log(data)
-        
         payload = {
           data: data,
           title: formdata.title,
@@ -185,9 +175,8 @@
       csvData();
     </script>
 
-
-    <py-script src="../static/scripts/local_algos.py">
-    </py-script>
+    <py-config style="visibility:collapse;"> packages = ["numpy", "pandas", "scikit-learn"] </py-config>
+    <py-script style="visibility: collapse;" src="../static/scripts/local_algos.py"> </py-script>
 
     {% include 'footer.html' %}
 
