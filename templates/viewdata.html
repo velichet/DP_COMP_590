@@ -65,33 +65,73 @@
       </div>
 
       <div class="row">
-        {%for s in stats['stats_data']%}
-        <div class="col-sm-12 col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{s|title}}</h5>
-              <table class="card-table">
-                <tr>
-                  <th>Statistic</th>
-                  <th>Value</th>
-                  <th>Epsilon</th>
-                </tr>
-                {%for f in stats['stats_data'][s]%}
-                <tr>
-                  <td class="table-val">{{f|replace("_"," ")|title}}</td>
-                  <td class="table-val">
-                    {{ (stats['stats'][s][f])|round(2) }}
-                  </td>
-                  <td class="table-val">
-                    {{stats['stats_data'][s][f]['epsilon']}}
-                  </td>
-                </tr>
-                {%endfor%}
-              </table>
+
+        {% if local == False %}
+          {%for s in stats['stats_data']%}
+          <div class="col-sm-12 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{s|title}}</h5>
+                <table class="card-table">
+                  <tr style="border-bottom:1px solid black">
+                    <th>Statistic</th>
+                    <th>Value</th>
+                    <th>Epsilon</th>
+                  </tr>
+                  {%for f in stats['stats_data'][s]%}
+                  <tr style="border-bottom:1px solid black">
+                    <td class="table-val">{{f|replace("_"," ")|title}}</td>
+                    <td class="table-val">
+                      {{ (stats['stats'][s][f])|round(2) }}
+                    </td>
+                    <td class="table-val">
+                      {{stats['stats_data'][s][f]['epsilon']}}
+                    </td>
+                  </tr>
+                  {%endfor%}
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-        {%endfor%}
+          {%endfor%}
+
+          {% else %}
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Metadata</h5>
+                {%for f in stats['stats_data']%}
+                <p><b>Field:</b> {{f|title}}</p>
+                <p><b>Epsilon:</b> {{stats['stats_data'][f]['count']['epsilon']}}</p>
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-9">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                {%for s in stats['stats']%}
+                <table class="card-table">
+                  <tr style="border-bottom:1px solid black">
+                    
+                    <th>{{s|title}}</th>
+                    
+                    <th>Count</th>
+                  </tr>
+                  {%for val in stats['stats'][s]['count']%}
+                  <tr style="border-bottom:1px solid black">
+                    <td class="table-val">{{val|title}}</td>
+                    <td class="table-val">{{stats['stats'][s]['count'][val]}}</td>
+                  </tr>
+                  {%endfor%}
+                </table>
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+          {% endif %}
       </div>
     </div>
 

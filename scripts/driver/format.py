@@ -29,3 +29,21 @@ def csv_format(data: str):
 
     # Return dict with lists
     return df.to_dict('list')
+
+def csv_to_df(data: str):
+    """
+    Input CSV str
+    Output pandas dataframe
+    """
+
+    # Make CSV all lower case
+    data = data.lower()   
+
+    # Convert CSV string to String IO
+    csv_string = StringIO(data)
+
+    # Read into dataframe
+    df = pd.read_csv(csv_string, sep=",")
+
+    # Return dataframe
+    return df

@@ -40,7 +40,7 @@ def upload():
     else:
         field = payload['stats'].keys()
         field = list(field)[0].lower()
-        stats[field] = {"count": payload['data']}
+        stats[field] = {"count": json.loads(payload['data'])}
 
     datastats_collection = db.data_stats
     datastats_collection.insert_one({
@@ -49,7 +49,7 @@ def upload():
         "stats": stats,
         "title": payload['title'],
         "description": payload['description'],
-        "author": "author", # TEMP NEED USER AUTH,
+        "author": "Safely Stat", # TEMP NEED USER AUTH,
         "stats_data": payload['stats']
     })
     
@@ -62,8 +62,12 @@ def get_datastats(datastatid):
     # Connect to mongo datastats collection
     db = mongo.get_database('diff-priv-data')
     datastats_collection = db.data_stats
+    datasets_collection = db.datasets
 
     # Find datastats
     stats = datastats_collection.find_one({"_id": ObjectId(datastatid)})
 
-    return render_template('viewdata.html', stats = stats)
+    metadata = datasets_collection.find_one({"_id": stats['datasets_id']})
+    local = metadata['local']
+
+    return render_template('viewdata.html', stats = stats, local = local)

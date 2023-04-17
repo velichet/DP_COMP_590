@@ -22,6 +22,18 @@
     /> <link href={{url_for('static', filename='style/upload.css')}}
     rel="stylesheet" />
 
+    <!-- <py-config>
+      
+
+      [[fetch]]
+      from = '../static/scripts/'
+      files = ['local_algos.py']
+    </py-config> -->
+
+    <py-config>
+      packages = ["numpy", "pandas", "scikit-learn"]
+    </py-config>
+
     <title>Safely Stat</title>
   </head>
   <body>
@@ -145,9 +157,11 @@
 
       async function sendData(csvdata, formdata) {
 
-        var localDP = pyscript.interpreter.globals.get('local_algo')
-        const data = localDP(csvdata, document.forms.dataInput.columnTitle.value)
+        var localDP = pyscript.interpreter.globals.get('local_dp')
+        const data = localDP(document.forms.dataInput.epsilon.value, document.forms.dataInput.columnTitle.value, csvdata)
 
+        console.log(data)
+        
         payload = {
           data: data,
           title: formdata.title,
@@ -171,9 +185,8 @@
       csvData();
     </script>
 
-    <py-script> 
-      def local_algo(csv_data, field): 
-        return 50 
+
+    <py-script src="../static/scripts/local_algos.py">
     </py-script>
 
     {% include 'footer.html' %}

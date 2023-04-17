@@ -1,9 +1,27 @@
 import numpy as np
 import math
-import random
-from sklearn.preprocessing import LabelEncoder
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from io import StringIO
+import json
 
+def csv_to_df(data: str):
+    """
+    Input CSV str
+    Output pandas dataframe
+    """
+
+    # Make CSV all lower case
+    data = data.lower()   
+
+    # Convert CSV string to String IO
+    csv_string = StringIO(data)
+
+    # Read into dataframe
+    df = pd.read_csv(csv_string, sep=",")
+
+    # Return dataframe
+    return df
 
 def label_data(col):
     """ 
@@ -28,7 +46,7 @@ def convert_epsilon(epsilon):
     
     """
     
-    const = math.pow(math.e, epsilon/2)
+    const = math.pow(math.e, float(epsilon)/2)
     p = const / (const + 1)
     q = 1-p
     
@@ -103,6 +121,9 @@ def local_dp(epsilon, col, data):
     3) data : The data should be a Dataframe  
     
     """
+
+    # Convert data to a dataframe
+    data = csv_to_df(data)
     
     domain = np.unique(data[col])
     size = domain.size
@@ -120,9 +141,12 @@ def local_dp(epsilon, col, data):
 
     estimate_values =  np.array((sum(peturb_vect) - q * len(peturb_vect)) / (p-q)).clip(0)
      
+    results = {}
+    i = 0
+    for d in domain:
+        results[d] = int(estimate_values[i])
+        i+=1
     
-    return   { col : domain,
-              'count' : estimate_values.astype(int)
-             }
+    return json.dumps(results)
 
     
