@@ -23,3 +23,5 @@ To connect to your MongoDB instance, create a .env file and update it with your 
 ```
 MONGO_URI = <link>
 ```
+
+Note : If you trying to execute the application on Apple M1 , PyDP package will fail and you will not be able to run the application . Issue here : https://github.com/OpenMined/PyDP/issues/402 
