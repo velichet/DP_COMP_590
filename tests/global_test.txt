@@ -1,0 +1,42 @@
+Mean: 50.0421
+Sum: 500421
+Standard Deviation: 29.14286633562021
+Variance: 849.3066582558256
+Min: 0
+Max: 100
+Median: 50.0
+bounded_mean || Epsilon: 0.1 || 51.53000800785139
+bounded_mean || Epsilon: 5 || 50.00782300291741
+bounded_mean || Epsilon: 10 || 50.05490452966295
+bounded_mean || Epsilon: 25 || 50.04363535861301
+bounded_mean || Epsilon: 50 || 50.04184434707551
+bounded_sum || Epsilon: 0.1 || 494735.94026824087
+bounded_sum || Epsilon: 5 || 500417.9785385769
+bounded_sum || Epsilon: 10 || 500291.93099648645
+bounded_sum || Epsilon: 25 || 500434.5928879613
+bounded_sum || Epsilon: 50 || 500423.75821580325
+standard_deviation || Epsilon: 0.1 || 24.908099296261362
+standard_deviation || Epsilon: 5 || 29.139123835765105
+standard_deviation || Epsilon: 10 || 29.091247284698635
+standard_deviation || Epsilon: 25 || 29.148891054581387
+standard_deviation || Epsilon: 50 || 29.144672427026862
+variance || Epsilon: 0.1 || 742.1174078861782
+variance || Epsilon: 5 || 852.779489324555
+variance || Epsilon: 10 || 851.6631798115764
+variance || Epsilon: 25 || 848.7880303509701
+variance || Epsilon: 50 || 849.0177251177602
+min || Epsilon: 0.1 || -6.889604252124326e+307
+min || Epsilon: 5 || 2.436221554092714e+280
+min || Epsilon: 10 || -3.8242294105771712e+258
+min || Epsilon: 25 || -1.0252082238512505e+184
+min || Epsilon: 50 || -1.149142920303381e+84
+max || Epsilon: 0.1 || 4.287778933419985e+307
+max || Epsilon: 5 || 1.2640932950973933e+286
+max || Epsilon: 10 || 9.989084988138765e+269
+max || Epsilon: 25 || 5.39275822610119e+213
+max || Epsilon: 50 || 1.7833931564698195e+120
+median || Epsilon: 0.1 || 2.898810766572678e+249
+median || Epsilon: 5 || 50.00000000000001
+median || Epsilon: 10 || 50.0
+median || Epsilon: 25 || 50.0
+median || Epsilon: 50 || 50.0

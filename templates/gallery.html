@@ -41,7 +41,6 @@
 
         {%for s in stats%}
 
-        
           <div class="col-sm-12 col-md-4 mt-3 mb-3">
             <a href= {{ url_for( 'data.get_datastats' , datastatid = s['_id']) }} >
               <div class="card gallery-card">
@@ -60,6 +59,7 @@
         
 
         {%endfor%}
+        
       </div>
 
     </div>
