@@ -7,8 +7,11 @@ import statistics
 
 
 orig_stdout = sys.stdout
-f = open('./tests/global_test.txt', 'w')
+f = open('./tests/global_test.csv', 'w')
 sys.stdout = f
+
+# Print
+print('statistic,epsilon,result')
 
 # Generate list of random values, 0 - 100
 vals = []
@@ -18,13 +21,13 @@ for i in range(0, 10000):
     vals.append(val)
 
 # True statistics
-print(f'Mean: {statistics.mean(vals)}')
-print(f'Sum: {sum(vals)}')
-print(f'Standard Deviation: {statistics.stdev(vals)}')
-print(f'Variance: {statistics.variance(vals)}')
-print(f'Min: {min(vals)}')
-print(f'Max: {max(vals)}')
-print(f'Median: {statistics.median(vals)}')
+print(f'Mean,{-1},{statistics.mean(vals)}')
+print(f'Sum,{-1},{sum(vals)}')
+print(f'Standard Deviation,{-1},{statistics.stdev(vals)}')
+print(f'Variance,{-1},{statistics.variance(vals)}')
+print(f'Min,{-1},{min(vals)}')
+print(f'Max,{-1},{max(vals)}')
+print(f'Median,{-1},{statistics.median(vals)}')
 
 # DP Statistics
 EPSILON = [0.1, 5, 10, 25, 50]
@@ -33,7 +36,10 @@ ALGORITHMS = ["bounded_mean", "bounded_sum", "standard_deviation", "variance", "
 
 for algo in ALGORITHMS:
     for e in EPSILON:
-        print(f'{algo} || Epsilon: {e} || {global_bounded_algo(vals, e, algo)}')
+        if(algo == 'max' or algo == 'min'):
+            print(f'{algo},{e},{global_bounded_algo(vals, e, algo, lower_bound=0, upper_bound=100)}')
+        else:
+            print(f'{algo},{e},{global_bounded_algo(vals, e, algo)}')
 
 sys.stdout = orig_stdout
 f.close()
