@@ -4,7 +4,7 @@ function form() {
     // Get form
     var form = document.forms.dataInput
 
-    var local = window.location.pathname.includes("local")
+    var local = false
     // Create object to hold form data
     var obj = {
         "title": form.datasetTitle.value,
