@@ -3,7 +3,7 @@ import random
 import statistics
 
 orig_stdout = sys.stdout
-f = open('./datasets/random_health_data.csv', 'w')
+f = open('random_health_data.csv', 'w')
 sys.stdout = f
 
 print("age,height,weight")
