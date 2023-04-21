@@ -3,12 +3,13 @@ from routes.data import data
 from routes.pages import page
 from routes.auth import auth
 from scripts.user import User
+import os
 
 
 app = Flask(__name__)
 
 # Will move this to env
-app.config['SECRET_KEY'] = '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 from routes.login import login_manager
 
