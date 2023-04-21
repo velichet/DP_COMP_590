@@ -28,7 +28,7 @@ def upload():
 
     # Insert data into datasets collection
     _id = datasets_collection.insert_one({
-        "user_id": current_user.id, # TEMP NEED USER AUTH
+        "user_id": current_user.id,
         "data": data,
         "local": payload['local']
         })
@@ -46,11 +46,11 @@ def upload():
     datastats_collection = db.data_stats
     datastats_collection.insert_one({
         "datasets_id": _id.inserted_id,
-        "user_id": current_user.id, # TEMP NEED USER AUTH
+        "user_id": current_user.id,
         "stats": stats,
         "title": payload['title'],
         "description": payload['description'],
-        "author": current_user.first_name + " " + current_user.last_name, # TEMP NEED USER AUTH,
+        "author": current_user.first_name + " " + current_user.last_name,
         "stats_data": payload['stats']
     })
     

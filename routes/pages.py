@@ -47,7 +47,7 @@ def mydata():
     datastats_collection = db.data_stats
 
     # Get signed in users datasets
-    user_id = ObjectId(current_user.id) # GET USER ID // THIS IS TEMP
+    user_id = ObjectId(current_user.id)
     stats = datastats_collection.find({"user_id": user_id})
 
     name = current_user.first_name + " " + current_user.last_name
