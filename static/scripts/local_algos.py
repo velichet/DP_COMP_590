@@ -67,7 +67,7 @@ def encode(input_data,d):
     
     ue_data = np.zeros(d)
     
-    if input_data:
+    if input_data != None:
         ue_data[input_data] = 1
         
     return ue_data
