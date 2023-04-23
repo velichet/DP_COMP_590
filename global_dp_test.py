@@ -30,7 +30,7 @@ print(f'Max,{-1},{max(vals)}')
 print(f'Median,{-1},{statistics.median(vals)}')
 
 # DP Statistics
-EPSILON = [0.1, 0.5, 1, 5, 10, 25, 50]
+EPSILON = [0.5, 1, 1.5, 2 , 2.5 , 3 ,3.5 , 4 , 4.5 , 5]
 
 ALGORITHMS = ["bounded_mean", "bounded_sum", "standard_deviation", "variance", "min", "max", "median"]
 
