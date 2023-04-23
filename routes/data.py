@@ -4,12 +4,13 @@ from scripts.driver.global_driver import driver_global_algo
 from bson.objectid import ObjectId
 from routes.db import mongo
 import json
-from bson import json_util
+from flask_login import login_required, current_user
 
 data = Blueprint('data', __name__)
 
 # Upload CSV to mongo database
 @data.route('/upload', methods=['POST'])
+@login_required
 def upload():
 
     # Get data from request
@@ -27,7 +28,7 @@ def upload():
 
     # Insert data into datasets collection
     _id = datasets_collection.insert_one({
-        "user_id": 0, # TEMP NEED USER AUTH
+        "user_id": current_user.id,
         "data": data,
         "local": payload['local']
         })
@@ -45,11 +46,11 @@ def upload():
     datastats_collection = db.data_stats
     datastats_collection.insert_one({
         "datasets_id": _id.inserted_id,
-        "user_id": 0, # TEMP NEED USER AUTH
+        "user_id": current_user.id,
         "stats": stats,
         "title": payload['title'],
         "description": payload['description'],
-        "author": "Safely Stat", # TEMP NEED USER AUTH,
+        "author": current_user.first_name + " " + current_user.last_name,
         "stats_data": payload['stats']
     })
     
@@ -57,6 +58,7 @@ def upload():
 
 # Retrieve data stats and display
 @data.route('/view/<datastatid>', methods=['GET'])
+@login_required
 def get_datastats(datastatid):
 
     # Connect to mongo datastats collection
